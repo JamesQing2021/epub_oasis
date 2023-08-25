@@ -1,7 +1,8 @@
 name: epub_oasis
 description: A Pure Flutter Widget For View Epub Sources on IOS And Android. Based On dart-epub and Epub View Packages. Added text selection feature and custom buttons to handle the selected text
-version: 0.0.1
-homepage:
+repository: https://github.com/JamesQing2021/epub_oasis.git
+version: 1.0.0
+
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
