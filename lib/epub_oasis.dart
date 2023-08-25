@@ -1,7 +1,8 @@
 library epub_oasis;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:epubx/epubx.dart';
+
+export 'src/ui/actual_chapter.dart';
+export 'src/ui/epub_oasis.dart';
+export 'src/ui/table_of_contents.dart';
+export 'src/helpers/epub_document.dart';

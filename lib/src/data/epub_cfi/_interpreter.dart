@@ -1,5 +1,6 @@
-import '/src/data/epub_cfi/_parser.dart';
 import 'package:html/dom.dart';
+
+import '/src/data/epub_cfi/_parser.dart';
 
 class EpubCfiInterpreter {
   Element? searchLocalPathForHref(

@@ -1,4 +1,4 @@
-part of '../ui/epub_view.dart';
+part of '../ui/epub_oasis.dart';
 
 typedef EpubViewBuilder<T> = Widget Function(
   /// Build context
@@ -49,9 +49,9 @@ class EpubViewBuilders<T> {
 
   const EpubViewBuilders({
     required this.options,
-    this.builder = _EpubViewState._builder,
-    this.chapterBuilder = _EpubViewState._chapterBuilder,
-    this.chapterDividerBuilder = _EpubViewState._chapterDividerBuilder,
+    this.builder = _EpubOasisViewState._builder,
+    this.chapterBuilder = _EpubOasisViewState._chapterBuilder,
+    this.chapterDividerBuilder = _EpubOasisViewState._chapterDividerBuilder,
     this.loaderBuilder,
     this.errorBuilder,
   });

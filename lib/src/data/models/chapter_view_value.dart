@@ -1,5 +1,6 @@
-import '/src/data/epub_parser.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+
+import '/src/data/epub_parser.dart';
 
 export 'package:epubx/epubx.dart' hide Image;
 

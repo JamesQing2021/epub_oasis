@@ -1,4 +1,4 @@
-part of 'ui/epub_view.dart';
+part of 'ui/epub_oasis.dart';
 
 class EpubController {
   EpubController({
@@ -9,11 +9,11 @@ class EpubController {
   Future<EpubBook> document;
   final String? epubCfi;
 
-  _EpubViewState? _epubViewState;
+  _EpubOasisViewState? _epubOasisViewState;
   List<EpubViewChapter>? _cacheTableOfContents;
   EpubBook? _document;
 
-  EpubChapterViewValue? get currentValue => _epubViewState?._currentValue;
+  EpubChapterViewValue? get currentValue => _epubOasisViewState?._currentValue;
 
   final isBookLoaded = ValueNotifier<bool>(false);
   final ValueNotifier<EpubViewLoadingState> loadingState =
@@ -24,7 +24,7 @@ class EpubController {
   final tableOfContentsListenable = ValueNotifier<List<EpubViewChapter>>([]);
 
   void jumpTo({required int index, double alignment = 0}) =>
-      _epubViewState?._itemScrollController?.jumpTo(
+      _epubOasisViewState?._itemScrollController?.jumpTo(
         index: index,
         alignment: alignment,
       );
@@ -35,7 +35,7 @@ class EpubController {
     double alignment = 0,
     Curve curve = Curves.linear,
   }) =>
-      _epubViewState?._itemScrollController?.scrollTo(
+      _epubOasisViewState?._itemScrollController?.scrollTo(
         index: index,
         duration: duration,
         alignment: alignment,
@@ -48,7 +48,7 @@ class EpubController {
     Duration duration = const Duration(milliseconds: 250),
     Curve curve = Curves.linear,
   }) {
-    _epubViewState?._gotoEpubCfi(
+    _epubOasisViewState?._gotoEpubCfi(
       epubCfi,
       alignment: alignment,
       duration: duration,
@@ -56,14 +56,16 @@ class EpubController {
     );
   }
 
-  String? generateEpubCfi() => _epubViewState?._epubCfiReader?.generateCfi(
+  String? generateEpubCfi() => _epubOasisViewState?._epubCfiReader?.generateCfi(
         book: _document,
-        chapter: _epubViewState?._currentValue?.chapter,
-        paragraphIndex: _epubViewState?._getAbsParagraphIndexBy(
-          positionIndex: _epubViewState?._currentValue?.position.index ?? 0,
+        chapter: _epubOasisViewState?._currentValue?.chapter,
+        paragraphIndex: _epubOasisViewState?._getAbsParagraphIndexBy(
+          positionIndex:
+              _epubOasisViewState?._currentValue?.position.index ?? 0,
           trailingEdge:
-              _epubViewState?._currentValue?.position.itemTrailingEdge,
-          leadingEdge: _epubViewState?._currentValue?.position.itemLeadingEdge,
+              _epubOasisViewState?._currentValue?.position.itemTrailingEdge,
+          leadingEdge:
+              _epubOasisViewState?._currentValue?.position.itemLeadingEdge,
         ),
       );
 
@@ -100,7 +102,7 @@ class EpubController {
   }
 
   void dispose() {
-    _epubViewState = null;
+    _epubOasisViewState = null;
     isBookLoaded.dispose();
     currentValueListenable.dispose();
     tableOfContentsListenable.dispose();
@@ -111,11 +113,11 @@ class EpubController {
     try {
       loadingState.value = EpubViewLoadingState.loading;
       _document = await document;
-      await _epubViewState!._init();
+      await _epubOasisViewState!._init();
       tableOfContentsListenable.value = tableOfContents();
       loadingState.value = EpubViewLoadingState.success;
     } catch (error) {
-      _epubViewState!._loadingError = error is Exception
+      _epubOasisViewState!._loadingError = error is Exception
           ? error
           : Exception('An unexpected error occurred');
       loadingState.value = EpubViewLoadingState.error;
@@ -123,17 +125,17 @@ class EpubController {
   }
 
   int _getChapterStartIndex(int index) =>
-      index < _epubViewState!._chapterIndexes.length
-          ? _epubViewState!._chapterIndexes[index]
+      index < _epubOasisViewState!._chapterIndexes.length
+          ? _epubOasisViewState!._chapterIndexes[index]
           : 0;
 
-  void _attach(_EpubViewState epubReaderViewState) {
-    _epubViewState = epubReaderViewState;
+  void _attach(_EpubOasisViewState epubReaderViewState) {
+    _epubOasisViewState = epubReaderViewState;
 
     _loadDocument(document);
   }
 
   void _detach() {
-    _epubViewState = null;
+    _epubOasisViewState = null;
   }
 }

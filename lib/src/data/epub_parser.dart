@@ -1,6 +1,6 @@
-import '/src/data/epub_cfi_reader.dart';
 import 'package:html/dom.dart' as dom;
 
+import '/src/data/epub_cfi_reader.dart';
 import 'models/paragraph.dart';
 
 export 'package:epubx/epubx.dart' hide Image;

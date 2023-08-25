@@ -1,6 +1,7 @@
-import '/src/data/models/chapter.dart';
-import '/src/ui/epub_view.dart';
 import 'package:flutter/material.dart';
+
+import '/src/data/models/chapter.dart';
+import 'epub_oasis.dart';
 
 class EpubViewTableOfContents extends StatelessWidget {
   const EpubViewTableOfContents({
